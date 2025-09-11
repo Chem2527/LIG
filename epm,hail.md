@@ -1,8 +1,4 @@
-# HAIL & EPM Deployment Guide
-
-**Authors:** Sagar, Bala  
-
-This document outlines the deployment steps for the HAIL and EPM applications across **UAT, Staging, and Production environments**.
+# HAIL & EPM Staging Deployment Guide
 
 ---
 
@@ -18,75 +14,101 @@ This document outlines the deployment steps for the HAIL and EPM applications ac
 
 ```bash
 ssh frappe@10.10.10.22
-# Provide password when prompted
-Directory Structure
-bash
-Copy code
+```
+```bash
 cd hail_epm_staging/frappe-bench
+```
 ls
 # apps, config, env, logs, patches.txt, Procfile, sites
 Apps
-Core apps (no changes needed):
-erpnext, frappe, hrms, payments
+- Core apps (no changes needed):
+- erpnext, frappe, hrms, payments
 
-Custom apps (we modify these):
-foxerp, foxerp_civic_cloud, foxerp_epm, foxerp_hail
+- Custom apps (we modify these):
+- foxerp, foxerp_civic_cloud, foxerp_epm, foxerp_hail
 
-Other apps (used in UAT/Prod only):
-foxerp_integration, zatca
+- Other apps (used in UAT/Prod only):
+- foxerp_integration, zatca
 
-Sites
-Site	Apps
-EPM	foxerp, foxerp_civic_cloud, foxerp_epm
-HAIL	foxerp, foxerp_civic_cloud, foxerp_hail
+## Sites
 
-bash
-Copy code
+- **EPM**:	foxerp, foxerp_civic_cloud, foxerp_epm
+- **HAIL**	foxerp, foxerp_civic_cloud, foxerp_hail
+
+```bash
 cd sites
-ls
-# epmstaging14.foxerp.com   hailstaging.leadergroup.com
-Bench Commands
-Note: These commands work inside frappe-bench directory.
+```
+```bash
+ls ##(epmstaging14.foxerp.com   hailstaging.leadergroup.com)
+```
+- Bench Commands
+- Note: These commands work inside frappe-bench directory.
 
-bash
-Copy code
+```bash
 bench --site epmstaging14.foxerp.com list-apps
+```
+```bash
 bench --site hailstaging.leadergroup.com list-apps
-Deployment Steps
-EPM Deployment
-bash
-Copy code
+```
+## Deployment Steps:
+
+```bash
 cd apps/foxerp
 git status
-# copy branch name (e.g., staging-ver-14)
+```
+## copy branch name (e.g., staging-ver-14)
+```bash
 git pull upstream staging-ver-14
-# provide git username and PAT
-
+```
+## provide git username and PAT
+```bash
 cd ../foxerp_epm
-git status
-git pull upstream staging-ver-14
-# provide git username and PAT
+```
 
-cd ../foxerp_civic_cloud
+```bash
 git status
+```
+```bash
 git pull upstream staging-ver-14
-# provide git username and PAT
-bash
-Copy code
-# Migrate and restart EPM site
-bench --site epmstaging14.foxerp.com migrate
-bench --site epmstaging14.foxerp.com clear-cache
-bench --site epmstaging14.foxerp.com clear-website-cache
-bench build
-bench restart
-HAIL Deployment
-bash
-Copy code
-cd apps/foxerp_hail
+```
+## provide git username and PAT
+```bash
+cd ../foxerp_civic_cloud
+```
+```bash
 git status
+```
+```bash
+git pull upstream staging-ver-14
+```
+## Migrate and restart EPM site
+
+```bash
+bench --site epmstaging14.foxerp.com migrate
+```
+```bash
+bench --site epmstaging14.foxerp.com clear-cache
+```
+```bash
+bench --site epmstaging14.foxerp.com clear-website-cache
+```
+```bash
+bench build
+```
+
+```bash
+bench restart
+```
+## HAIL Deployment
+```bash
+cd apps/foxerp_hail
+```
+```bash
+git status
+```
+```bash
 git pull upstream staging
-bash
-Copy code
+```
 # Migrate and restart HAIL site
 bench --site hailstaging.leadergroup.com migrate
 bench --site hailstaging.leadergroup.com clear-cache
