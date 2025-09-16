@@ -31,3 +31,11 @@ bench --site leaderstaging15.foxerp.com clear-cache
 bench --site leaderstaging15.foxerp.com clear-website-cache
 bench --site leaderstaging15.foxerp.com  build
 bench restart
+
+
+
+install and create new app
+
+
+bench --site <domain name> install-app <app name>
+
