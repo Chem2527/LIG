@@ -35,11 +35,17 @@ bench restart
 
 
 ## install and create new app
-
+```bash
 bench get-app --branch <branchname> <repourl>
-
+```
+```bash
 bench --site <domainname> install-app <appname>
+```
 
+```bash
 bench --site <domainname> migrate
+```
+```bash
 bench --site <domainname> build
+```
 bench restart
