@@ -36,10 +36,10 @@ bench restart
 
 ## install and create new app
 
-bench get-app --branch <branch name> <repo url>
+bench get-app --branch <branchname> <repourl>
 
-bench --site <domain name> install-app <app name>
+bench --site <domainname> install-app <appname>
 
 bench --site <domainname> migrate
-bench --site <domain name> build
+bench --site <domainname> build
 bench restart
